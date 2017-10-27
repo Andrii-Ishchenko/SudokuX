@@ -8,22 +8,31 @@ namespace SudokuX.Core
 {
     public class Cell
     {
-        public Cell (int x, int y, Block block, Row row, Column column)
+        public Cell (int x, int y, Group block, Group row, Group column, int value)
 	    {
             digits = new bool[9];
             selectedDigits = new List<short>();
             IsValueSet = false;
+
+            block.AddCell(this);
+            row.AddCell(this);
+            column.AddCell(this);
+
+            X = x;
+            Y = y;
 	    }
 
         readonly bool[] digits;
         readonly List<short> selectedDigits;
 
+        
         public int X {get; private set;}
         public int Y {get; private set;}
 
-        public Row Row { get; private set; }
-        public Column Column { get; private set; }
-        public Block Block { get; private set; }
+
+        public Group Row { get; private set; }
+        public Group Column { get; private set; }
+        public Group Block { get; private set; }
 
         public bool IsValueSet { get; private set; }
         public bool IsPredefined { get; private set; }

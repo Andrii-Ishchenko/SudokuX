@@ -29,19 +29,17 @@ namespace SudokuX.Core
                 for (var y = 1; y <= 9; y++)
                 {
                     var row = Rows[y - 1];
-                    var block = Blocks[]
-                    var cell = new Cell(x,y);
-
+                    var block = GetBlockByXY((short)x, (short)y);
+                    Cells.Add(new Cell(x, y, block, row, column, 0));
                 }
             }
         }
 
-        private Group GetGroupByXY(short X, short Y, Group[] groups)
+        private Group GetBlockByXY(short X, short Y)
         {
-            int row = (Y + 1) / 3;
-            int column = (X + 1) / 3;
-            return groups[row + column];
-
+            int row = (Y - 1) / 3 + 1;
+            int column = (X - 1) / 3 + 1;
+            return Blocks[row * 3 + column];
         }
     }
 }
