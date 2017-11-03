@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,9 +12,27 @@ namespace SudokuTest
     {
         static void Main(string[] args)
         {
+            string input;
             var sudoku = new Sudoku(GetValueString());
-            Print(sudoku.Grid);
-            Console.ReadKey();
+            //Print(sudoku.Grid);
+
+            do
+            {
+                Console.WriteLine("Select What To Do:");
+                Console.WriteLine("1 :\tPrint Sudoku");
+                Console.WriteLine("2 :\tGet Cell Value");
+                Console.WriteLine();
+                Console.WriteLine("Exit - type 'exit'.");
+                input = Console.ReadLine();
+
+                ProcessInput(input);
+
+            } while (input.ToLower().Equals("exit"));
+        }
+
+        private static void ProcessInput(string input)
+        {
+            
         }
 
         static string GetValueString()
