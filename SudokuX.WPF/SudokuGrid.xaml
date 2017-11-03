@@ -5,32 +5,32 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SudokuX.WPF"
              mc:Ignorable="d" 
-             d:DesignHeight="380" d:DesignWidth="380">
-    <Grid Margin="10" >
+             d:DesignHeight="600" d:DesignWidth="600">
+    <Grid Name="rootGrid" Margin="12" Background="#fefefe">
         <Grid.RowDefinitions >
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
+            <RowDefinition Height="64"></RowDefinition>
         </Grid.RowDefinitions>    
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
+            <ColumnDefinition Width="64"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         
-        <local:Cell Grid.Row="0" Grid.Column="0"></local:Cell>
+        <!--<local:Cell Grid.Row="0" Grid.Column="0"></local:Cell>
         <local:Cell Grid.Row="0" Grid.Column="1"></local:Cell>
         <local:Cell Grid.Row="0" Grid.Column="2"></local:Cell>
         <local:Cell Grid.Row="0" Grid.Column="3"></local:Cell>
@@ -118,7 +118,7 @@
         <local:Cell Grid.Row="8" Grid.Column="5"></local:Cell>
         <local:Cell Grid.Row="8" Grid.Column="6"></local:Cell>
         <local:Cell Grid.Row="8" Grid.Column="7"></local:Cell>
-        <local:Cell Grid.Row="8" Grid.Column="8"></local:Cell>
+        <local:Cell Grid.Row="8" Grid.Column="8"></local:Cell>-->
 
     </Grid>
 </UserControl>

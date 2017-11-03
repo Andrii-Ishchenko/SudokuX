@@ -22,14 +22,17 @@ namespace SudokuX.Core.Utils
                         "600903000" +
                         "004850020";
 
-
             for (var i = 0; i < str.Length; i++)
             {
-                
+                var col = i%10;
+                var row = i/10;
+
+                int digit = (int) char.GetNumericValue(str[i]);
+
+                arr[row, col] = digit;
             }
 
             return arr;
-        }
-            
+        }         
     }
 }

@@ -7,7 +7,9 @@
              mc:Ignorable="d"
              x:Name="uc"
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            <Label HorizontalAlignment="Center" VerticalAlignment="Center" Content="{Binding Path=Value, ElementName=uc}"></Label>
+    <Grid Margin="0">
+        <Border >
+            <Label HorizontalAlignment="Center" VerticalAlignment="Center"  Content="{Binding Path=Value, ElementName=uc}"></Label>
+        </Border>
     </Grid>
 </UserControl>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,12 +24,17 @@ namespace SudokuX.WPF
         public Cell()
         {
             InitializeComponent();
-            Value = (short)(1 + new Random().Next(8));
+            Value = (short)(1 + new Random((int)DateTime.Now.Ticks).Next(8));
         }
 
-        public short Value { get; set; }
+        public short Value
+        {
+            get { return (short) GetValue(ValueProperty); }
+            set { SetValue(ValueProperty, value);}
+        }
 
         public static DependencyProperty ValueProperty = DependencyProperty.Register("Value", typeof(short), typeof(Cell));
+
 
     }
 }

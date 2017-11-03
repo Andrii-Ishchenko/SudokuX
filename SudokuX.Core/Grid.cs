@@ -14,8 +14,9 @@ namespace SudokuX.Core
         public Group[] Columns { get; private set; }
         public Group[] Rows { get; private set; }
 
-        public Grid()
+        public Grid(int[,] values)
         {
+            
             for (short i = 1; i <= 9; i++)
             {
                 Blocks[i] = new Group(i);
@@ -30,7 +31,7 @@ namespace SudokuX.Core
                 {
                     var row = Rows[y - 1];
                     var block = GetBlockByXY((short)x, (short)y);
-                    Cells.Add(new Cell(x, y, block, row, column, 0));
+                    Cells.Add(new Cell(x, y, block, row, column, values[x,y]));
                 }
             }
         }

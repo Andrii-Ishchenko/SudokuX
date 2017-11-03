@@ -35,7 +35,7 @@ namespace SudokuX.Core
         public Group Block { get; private set; }
 
         public bool IsValueSet { get; private set; }
-        public bool IsPredefined { get; private set; }
+        public bool IsReadOnly { get; private set; }
         public short Value { get; private set;}
 
         public List<short> Digits { get { return selectedDigits.Select(x => x).ToList(); } }
@@ -77,11 +77,38 @@ namespace SudokuX.Core
 
         public void SetValue(short value)
         {
-            if(IsValueSet || IsPredefined)
+            if(IsValueSet || IsReadOnly)
                 return;
 
             Value = value;
             IsValueSet = true;
+        }
+
+        public void EliminateValueFromGroups()
+        {
+            foreach (var cell in Block)
+            {
+                if (cell == this)
+                    continue;
+
+                cell.RemoveDigit(this.Value);
+            }
+
+            foreach (var cell in Row)
+            {
+                if (cell == this)
+                    continue;
+
+                cell.RemoveDigit(this.Value);
+            }
+
+            foreach (var cell in Column)
+            {
+                if (cell == this)
+                    continue;
+
+                cell.RemoveDigit(this.Value);
+            }
         }
     }
 }

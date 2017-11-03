@@ -23,6 +23,41 @@ namespace SudokuX.WPF
         public SudokuGrid()
         {
             InitializeComponent();
+            CreateStyledGrid();
+        }
+
+        private void CreateStyledGrid()
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                for (int j = 0; j < 9; j++)
+                {
+                    var border = new Border()
+                    {
+                        BorderBrush = Brushes.Black,
+                        BorderThickness = GetBorderThickness(i, j, 0.25, 1),
+                        HorizontalAlignment = HorizontalAlignment.Stretch,
+                        VerticalAlignment = VerticalAlignment.Stretch
+                    };
+
+                    Cell cell = new Cell();
+                    border.Child = cell;
+                    Grid.SetRow(border, i);
+                    Grid.SetColumn(border, j);
+                    rootGrid.Children.Add(border);
+                }
+            }
+
+
+        }
+
+        private Thickness GetBorderThickness(int i, int j, double thin, double thick)
+        {
+            var top = i%3 == 0 ? thick : thin;
+            var bottom = i%3 == 2 ? thick : thin;
+            var left = j%3 == 0 ? thick : thin;
+            var right = j%3 == 2 ? thick : thin;
+            return  new Thickness(left, top, right, bottom);
         }
     }
 }
