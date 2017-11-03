@@ -8,26 +8,18 @@ namespace SudokuX.Core.Utils
 {
     public static class GridHelper
     {
-        public static int[,] GetDefaultGridValues()
+        public static short[,] GetValuesFromString(string valueString)
         {
-            var arr = new int[9,9];
+            var arr = new short[9,9];
 
-            var str =   "050027400" +
-                        "000605008" +
-                        "030100009" +
-                        "063000000" +
-                        "042000310" +
-                        "000000650" +
-                        "700006080" +
-                        "600903000" +
-                        "004850020";
 
-            for (var i = 0; i < str.Length; i++)
+
+            for (var i = 0; i < valueString.Length; i++)
             {
-                var col = i%10;
-                var row = i/10;
+                var col = i%9;
+                var row = i/9;
 
-                int digit = (int) char.GetNumericValue(str[i]);
+                short digit = (short) char.GetNumericValue(valueString[i]);
 
                 arr[row, col] = digit;
             }
