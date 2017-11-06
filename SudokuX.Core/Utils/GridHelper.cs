@@ -12,18 +12,21 @@ namespace SudokuX.Core.Utils
         {
             var arr = new short[9,9];
 
-
-
             for (var i = 0; i < valueString.Length; i++)
             {
                 var col = i%9;
                 var row = i/9;
 
+                char c = valueString[i];
+                if (c == '.')
+                {
+                    arr[row, col] = 0;
+                    continue;
+                }
+                 
                 short digit = (short) char.GetNumericValue(valueString[i]);
-
                 arr[row, col] = digit;
             }
-
             return arr;
         }         
     }

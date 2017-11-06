@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SudokuTest.Commands;
 using SudokuX.Core;
 
 namespace SudokuTest
@@ -14,20 +15,36 @@ namespace SudokuTest
         {
             string input;
             var sudoku = new Sudoku(GetValueString());
-            //Print(sudoku.Grid);
-
+           
             do
             {
                 Console.WriteLine("Select What To Do:");
-                Console.WriteLine("1 :\tPrint Sudoku");
-                Console.WriteLine("2 :\tGet Cell Value");
+                Console.WriteLine("(p) :\tPrint Sudoku");
+                Console.WriteLine("(c x y) :\tGet Cell Value Or Candidates");
+                Console.WriteLine("(can x y) :\tGet Cell Candidates");
+                Console.WriteLine("(v x y) :\tGet Cell Value");
                 Console.WriteLine();
-                Console.WriteLine("Exit - type 'exit'.");
+                Console.WriteLine("(exit) :\tExit.");
                 input = Console.ReadLine();
 
-                ProcessInput(input);
+                var parsed = CommandParser.Parse(input);
+                BaseCommand command = null;
+                switch (parsed.CommandName)
+                {
+                    case "p":
+                    case "print":
+                        command = new PrintCommand(parsed);
+                        break;
+                    default:
+                        break;
+                }
 
-            } while (input.ToLower().Equals("exit"));
+                if(command!= null)
+                    command.Execute(sudoku);
+
+                Console.WriteLine();
+
+            } while (input.ToLower()!="exit");
         }
 
         private static void ProcessInput(string input)
@@ -37,29 +54,16 @@ namespace SudokuTest
 
         static string GetValueString()
         {
-            return  "050027400" +
-                    "000605008" +
-                    "030100009" +
-                    "063000000" +
-                    "042000310" +
-                    "000000650" +
-                    "700006080" +
-                    "600903000" +
-                    "004850020";
+            return  ".5..274.." +
+                    "...6.5..8" +
+                    ".3.1....9" +
+                    ".63......" +
+                    ".42...31." +
+                    "......65." +
+                    "7....6.8." +
+                    "6..9.3..." +
+                    "..485..2.";
         }
 
-        static void Print(Grid g)
-        {
-            StringBuilder sb = new StringBuilder();
-            foreach (var row in g.Rows)
-            {
-                foreach (var cell in row)
-                {
-                    sb.Append(cell.IsValueSet ? cell.Value.ToString() : ".");
-                }
-                sb.AppendLine();
-            }
-            Console.WriteLine(sb);
-        }
     }
 }

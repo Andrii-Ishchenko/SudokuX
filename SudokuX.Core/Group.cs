@@ -15,6 +15,7 @@ namespace SudokuX.Core
         public Group(short index)
         {
             Cells = new List<Cell>();
+            Index = index;
         }
 
         public short Index { get; private set; }
@@ -23,6 +24,17 @@ namespace SudokuX.Core
         public void AddCell(Cell cell)
         {
             Cells.Add(cell);
+        }
+
+        public void EliminateCandidate(short value, Cell except)
+        {
+            foreach (var cell in Cells)
+            {
+                if (cell.Index == except.Index)
+                    continue;
+
+                cell.RemoveCandidate(value);
+            }
         }
 
         public IEnumerator<Cell> GetEnumerator()

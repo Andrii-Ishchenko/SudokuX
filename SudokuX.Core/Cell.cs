@@ -8,10 +8,14 @@ namespace SudokuX.Core
 {
     public class Cell
     {
-        public Cell (int x, int y, Group block, Group row, Group column, short value)
+        public Cell (short x, short y, Group block, Group row, Group column, short value)
 	    {
-            digits = new bool[9];
-            selectedDigits = new List<short>();
+            candidatesFlags = new bool[9];
+            candidates = new List<short>();
+
+            Block = block;
+            Row = row;
+            Column = column;
 
             if (value == 0)
             {
@@ -24,9 +28,7 @@ namespace SudokuX.Core
                 IsValueSet = true;
                 IsReadOnly = true;
             }
-
-            
-
+        
             block.AddCell(this);
             row.AddCell(this);
             column.AddCell(this);
@@ -35,13 +37,14 @@ namespace SudokuX.Core
             Y = y;
 	    }
 
-        readonly bool[] digits;
-        readonly List<short> selectedDigits;
+        readonly bool[] candidatesFlags;
+        readonly List<short> candidates;
 
         
-        public int X {get; private set;}
-        public int Y {get; private set;}
+        public short X {get; }
+        public short Y {get; }
 
+        public short Index => (short)(X + 9*Y);
 
         public Group Row { get; private set; }
         public Group Column { get; private set; }
@@ -51,40 +54,41 @@ namespace SudokuX.Core
         public bool IsReadOnly { get; private set; }
         public short Value { get; private set;}
 
-        public List<short> Digits { get { return selectedDigits.Select(x => x).ToList(); } }
+        /*Makes a copy of the list to not break incapsulation*/
+        public List<short> Candidates { get { return candidates.Select(x => x).ToList(); } }
 
-        public bool IsDigitSet(short digit)
+        public bool IsCandidateSet(short candidate)
         {
-            return digits[digit-1];
+            return candidatesFlags[candidate-1];
         }
 
-        public void SetDigit(short digit)
+        public void SetCandidate(short candidate)
         {
-            digits[digit-1] = true;
-            if (!selectedDigits.Contains(digit))
+            candidatesFlags[candidate-1] = true;
+            if (!candidates.Contains(candidate))
             {
-                selectedDigits.Add(digit);
+                candidates.Add(candidate);
             }            
         }
 
-        public void RemoveDigit(short digit)
+        public void RemoveCandidate(short candidate)
         {
-            digits[digit - 1] = false;
-            if (selectedDigits.Contains(digit))
+            candidatesFlags[candidate - 1] = false;
+            if (candidates.Contains(candidate))
             {
-                selectedDigits.Remove(digit);
+                candidates.Remove(candidate);
             }
         }
 
-        public void ToggleDigit(short digit)
+        public void ToggleCandidate(short candidate)
         {
-            if (IsDigitSet(digit))
+            if (IsCandidateSet(candidate))
             {
-                SetDigit(digit);
+                SetCandidate(candidate);
             }
             else
             {
-                RemoveDigit(digit);
+                RemoveCandidate(candidate);
             }
         }
 
@@ -99,29 +103,9 @@ namespace SudokuX.Core
 
         public void EliminateValueFromGroups()
         {
-            foreach (var cell in Block)
-            {
-                if (cell == this)
-                    continue;
-
-                cell.RemoveDigit(this.Value);
-            }
-
-            foreach (var cell in Row)
-            {
-                if (cell == this)
-                    continue;
-
-                cell.RemoveDigit(this.Value);
-            }
-
-            foreach (var cell in Column)
-            {
-                if (cell == this)
-                    continue;
-
-                cell.RemoveDigit(this.Value);
-            }
+            Block.EliminateCandidate(Value, this);
+            Row.EliminateCandidate(Value, this);
+            Column.EliminateCandidate(Value, this);
         }
     }
 }
