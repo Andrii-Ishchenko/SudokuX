@@ -11,7 +11,7 @@ namespace SudokuTest.Commands
     {
 
         public PrintCommand(Parsed parsed) 
-            : base("Print", "p", "Print Command",parsed)
+            : base("Print",parsed)
         {
         }
 

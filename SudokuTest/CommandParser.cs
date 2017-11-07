@@ -11,7 +11,7 @@ namespace SudokuTest
     {
         public static Parsed Parse(string input)
         {
-            string[] parts = input.Split(' ');
+            string[] parts = input.Trim().Split(' ');
 
             var name = parts[0].ToLower();
         

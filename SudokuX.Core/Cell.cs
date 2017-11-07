@@ -21,6 +21,10 @@ namespace SudokuX.Core
             {
                 IsValueSet = false;
                 IsReadOnly = false;
+                for(short i=1; i<=9; i++)
+                {
+                    SetCandidate(i);
+                }
             }
             else
             {

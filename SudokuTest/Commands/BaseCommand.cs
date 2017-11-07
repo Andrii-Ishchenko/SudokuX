@@ -10,16 +10,12 @@ namespace SudokuTest.Commands
     public abstract class BaseCommand
     {
         public string CommandName { get; }
-        public string Abbreviation { get; }
-        public string Description { get; }
 
         public Parsed Parsed { get; }
 
-        protected BaseCommand(string commandName, string abbreviation, string description, Parsed parsed)
+        protected BaseCommand(string commandName, Parsed parsed)
         {
             CommandName = commandName;
-            Abbreviation = abbreviation;
-            Description = description;
             Parsed = parsed;
         }
 

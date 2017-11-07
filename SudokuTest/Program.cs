@@ -14,42 +14,19 @@ namespace SudokuTest
         static void Main(string[] args)
         {
             string input;
+
             var sudoku = new Sudoku(GetValueString());
-           
+
+            CommandProcessor processor = new CommandProcessor();
+            processor.Init();
+
             do
             {
-                Console.WriteLine("Select What To Do:");
-                Console.WriteLine("(p) :\tPrint Sudoku");
-                Console.WriteLine("(c x y) :\tGet Cell Value Or Candidates");
-                Console.WriteLine("(can x y) :\tGet Cell Candidates");
-                Console.WriteLine("(v x y) :\tGet Cell Value");
-                Console.WriteLine();
-                Console.WriteLine("(exit) :\tExit.");
                 input = Console.ReadLine();
+                processor.Process(input, sudoku);
+            }
+            while (input.ToLower() != "exit");
 
-                var parsed = CommandParser.Parse(input);
-                BaseCommand command = null;
-                switch (parsed.CommandName)
-                {
-                    case "p":
-                    case "print":
-                        command = new PrintCommand(parsed);
-                        break;
-                    default:
-                        break;
-                }
-
-                if(command!= null)
-                    command.Execute(sudoku);
-
-                Console.WriteLine();
-
-            } while (input.ToLower()!="exit");
-        }
-
-        private static void ProcessInput(string input)
-        {
-            
         }
 
         static string GetValueString()
