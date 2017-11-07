@@ -7,16 +7,15 @@ using SudokuX.Core;
 
 namespace SudokuTest.Commands
 {
-    public class PrintCommand: BaseCommand
+    public class PrintCommand : BaseCommand
     {
-
-        public PrintCommand(Parsed parsed) 
-            : base("Print",parsed)
+        public PrintCommand(Parsed parsed) : base("Print",parsed)
         {
         }
 
         public override void Execute(Sudoku sudoku){
             StringBuilder sb = new StringBuilder();
+
             foreach (var row in sudoku.Rows)
             {
                 foreach (var cell in row)

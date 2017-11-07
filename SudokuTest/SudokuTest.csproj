@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="CommandProcessor.cs" />
     <Compile Include="CommandParser.cs" />
+    <Compile Include="CommandRoot.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\EliminateValuesCommand.cs" />
     <Compile Include="Commands\GetCellCommand.cs" />
